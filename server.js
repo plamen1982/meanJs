@@ -37,7 +37,7 @@ if(env == 'development'){
     mongoose.connect('mongodb://localhost/macodingclub');
 }
 else {
-    mongoose.connect('mongodb://admin:98Tu34pA@ds033797.mongolab.com:33797/macodingclub');
+    mongoose.connect('mongodb://phristov:98Tu34pA@ds033797.mongolab.com:33797/macodingclub');
 }
 
 var db = mongoose.connection;
