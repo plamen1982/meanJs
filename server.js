@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 
 var app = express();
 var env = process.env.NODE_ENV || 'development';
+var port = process.env.PORT || 3030;
 
 
 var viewEngine = 'jade';
@@ -14,7 +15,6 @@ var pathToServerViews = '/server/views';
 
 app.set('view engine', viewEngine);
 app.set('views', __dirname + pathToServerViews);
-
 app.use(stylus.middleware(
     {
         src: __dirname + '/public',
@@ -33,7 +33,13 @@ app.get('*',function(req, res){
     res.render('index',  {message:messageFromDB});
 });
 
-mongoose.connect('mongodb://localhost/macodingclub');
+if(env == 'development'){
+    mongoose.connect('mongodb://localhost/macodingclub');
+}
+else {
+    mongoose.connect('mongodb://admin:98Tu34pA@ds033797.mongolab.com:33797/macodingclub');
+}
+
 var db = mongoose.connection;
 
 db.on('open', function(err){
@@ -69,7 +75,7 @@ Message.remove({}, function(err){
         console.log('All Message objects have been removed !!!');
         Message.create({message:'Hi from Mongoose! '})
             .then(function(model){
-                console.log(model.message)
+                console.log(model.message);
                 messageFromDB = model.message;
             });
     }
@@ -77,3 +83,4 @@ Message.remove({}, function(err){
 
 app.listen(port);
 console.log('Server running on port: %s ', port);
+console.log(env);
