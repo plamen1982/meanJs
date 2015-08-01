@@ -1,0 +1,24 @@
+body {
+  padding-top: 75px;
+}
+.navbar-right .navbar-form input {
+  margin-right: 15px;
+}
+.navbar.navbar-inverse .navbar-collapse .nav {
+  width: 45%;
+}
+footer {
+  clear: both;
+  padding: 15px 0 52px;
+  margin: 40px 0 0;
+  background: url("./img/footer_line.jpg") no-repeat top center;
+  font-family: league_gothic_regular;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+}
+@media (min-width: 768px) {
+  .navbar-form .form-control {
+    width: 27%;
+  }
+}

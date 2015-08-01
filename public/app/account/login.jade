@@ -1,0 +1,6 @@
+.navbar-right
+    form.navbar-form
+        .form-group(ng-controller="LoginCtrl")
+            input.form-control(type="text", placeholder="Username", ng-model="user.name")
+            input.form-control(type="password", placeholder="Password", ng-model="user.password")
+            button.btn.btn-default(type="submit", ng-click="login(user)") Login

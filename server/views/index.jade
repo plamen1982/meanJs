@@ -1,9 +1,39 @@
 extends includes/layout
-
 block main-content
-    div(ng-controller="MainCtrl")
-        h1 Hello World from index.jade
-        h2 {{hello}}
-        h3= message
+    .navbar.navbar-inverse.navbar-fixed-top
+        .container
+            .navbar-header
+                button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-menu")
+                    span(class="sr-only") Toggle navigation
+                    span(class="icon-bar")
+                    span(class="icon-bar")
+                    span(class="icon-bar")
+                a(class="navbar-brand" href="#/") MA Coding Club
+            .collapse.navbar-collapse(id="main-menu")
+                ul.nav.navbar-nav
+                    li.active
+                        a(href="#/") Home
+                    li
+                        a(href="#/") About Us
+                    li
+                        a(href="#/courses") Courses
+                    li
+                        a(href="#/") Gallery
+                    li
+                        a(href="#/")
+                            span.glyphicon.glyphicon-user
+                div(ng-include="'partials/account/login.jade'")
+
+    section
+        div(ng-view)
+    footer
+        .container.text-center
+            |&copy; macodingclub
+
+
+
+
+
+
 
 
