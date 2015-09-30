@@ -9,7 +9,7 @@ module.exports =  {
     },
     production:{
         rootPath: rootPath,
-        db:'mongodb://phristov:98Tu34pA@ds033797.mongolab.com:33797/macodingclub',
+        db:'mongodb://paxito1982:aaaaaaaaA@ds033797.mongolab.com:33797/macodingclub',
         port: process.env.PORT || 3040
     }
 };
