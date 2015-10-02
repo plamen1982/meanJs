@@ -1,7 +1,8 @@
-app.factory('identity', function(){
+app.factory('identity', function($window){
+    console.log($window.bootstrappedUserObject);
     var currentUser;
     return {
-        currentUser : currentUser,
+        currentUser: $window.bootstrappedUserObject,
         isAuthenticated: function(){
             return !!this.currentUser
         }

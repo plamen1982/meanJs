@@ -28,10 +28,22 @@ module.exports = function(config) {
         salt: String,
         hashPass: String
     });
+    //
+    userSchema.method = {
+        authenticate: function(password){
+            if(generateHashPassword(this.salt, password)=== this.password){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    };
 
     // create mongoose object User, with the userSchema
     var User = mongoose.model('User', userSchema);
     //in this User object extract from the dataBase
+
     User.find({}).exec(function(err, collection){
         if(err){
             console.log('Cannot find users: ' + err);
@@ -44,10 +56,15 @@ module.exports = function(config) {
 
             salt = generateSalt();
             hashedPsw = generateHashPassword(salt, 'Plamen');
+            User.create({username: 'plamen.hristov', firstName:'Plamen', lastName:'Hristov', salt: salt, hashPass: hashedPsw});
 
-            User.create({username: 'plamen.hristov', firstName:'Plamen', lastName:'Hristov', salt: salt, hashPass: hashPawd});
-            User.create({username: 'ivailo.kenov', firstName:'Ivailo', lastName:'Kenov', salt: salt, hashPass: hashPawd});
-            User.create({username: 'nikolai.it', firstName:'Nikolai', lastName:'Hristov', salt: salt, hashPass: hashPawd});
+            salt = generateSalt();
+            hashedPsw = generateHashPassword(salt, 'Plamen');
+            User.create({username: 'ivailo.kenov', firstName:'Ivailo', lastName:'Kenov', salt: salt, hashPass: hashedPsw});
+
+            salt = generateSalt();
+            hashedPsw = generateHashPassword(salt, 'Plamen');
+            User.create({username: 'nikolai.it', firstName:'Nikolai', lastName:'Hristov', salt: salt, hashPass: hashedPsw});
             console.log('Users added to Database... ')
         }
     });

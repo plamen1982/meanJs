@@ -8,11 +8,16 @@ module.exports = {
                 res.send({success: false})
             }
 
-            req.login(user, function(err){
+            req.logIn(user, function(err){
                 if(err)  { return next(err)}
                 res.send({success:true, user: user})
             })
         });
+
         auth(req, res, next)
+    },
+    logout: function(req, res, next){
+        req.logout();
+        res.end();
     }
 };
