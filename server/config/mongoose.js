@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var passport = require('passport');
-var passportLocal = require('passport-local');
-var LocalStrategy = require('passport-local').Strategy;
+var LocalPassport = require('passport-local');
+
 
 module.exports = function(config) {
     mongoose.connect(config.db);
@@ -22,7 +22,7 @@ module.exports = function(config) {
 
     // create the Schema with the types of the data and names of the fields, the mongoose object is already connected with the database
     var userSchema = mongoose.Schema({
-        userName: String,
+        username: String,
         firstName: String,
         lastName: String
 /*        salt: String,
@@ -39,16 +39,16 @@ module.exports = function(config) {
         }
 
         if(collection.length === 0){
-            User.create({userName: 'plamen.hristov', firstName:'Plamen', lastName:'Hristov'});
-            User.create({userName: 'ivailo.kenov', firstName:'Ivailo', lastName:'Kenov'});
-            User.create({userName: 'nikolai.it', firstName:'Nikolai', lastName:'Hristov'});
+            User.create({username: 'plamen.hristov', firstName:'Plamen', lastName:'Hristov'});
+            User.create({username: 'ivailo.kenov', firstName:'Ivailo', lastName:'Kenov'});
+            User.create({username: 'nikolai.it', firstName:'Nikolai', lastName:'Hristov'});
             console.log('Users added to Database... ')
         }
     });
 
     //create new Instanse of the LocalStrategy, use is for middlewares
-    passport.use(new LocalStrategy(function(userName, password, done){
-       User.findOne({userName: userName}).exec(function(err, user){
+    passport.use(new LocalPassport(function(username, password, done){
+       User.findOne({username: username}).exec(function(err, user){
            if(err){
                console.log('Error loading user: ' + err);
                return;
