@@ -1,6 +1,4 @@
 var mongoose = require('mongoose');
-var passport = require('passport');
-var LocalPassport = require('passport-local');
 var crypto = require('crypto');
 
 module.exports = function(config) {
@@ -29,16 +27,18 @@ module.exports = function(config) {
         hashPass: String
     });
     //
-    userSchema.method = {
-        authenticate: function(password){
-            if(generateHashPassword(this.salt, password)=== this.password){
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-    };
+            userSchema.method({
+                authenticate: function(password){
+
+                  if (generateHashedPassword(this.salt, password) === this.hashPass){
+                      return true;
+                  }
+                  else {
+                      return false;
+                  }
+              }
+            });
+
 
     // create mongoose object User, with the userSchema
     var User = mongoose.model('User', userSchema);
@@ -55,63 +55,30 @@ module.exports = function(config) {
             var hashedPsw;
 
             salt = generateSalt();
-            hashedPsw = generateHashPassword(salt, 'Plamen');
-            User.create({username: 'plamen.hristov', firstName:'Plamen', lastName:'Hristov', salt: salt, hashPass: hashedPsw});
+            hashedPsw = generateHashedPassword(salt, 'Plamen');
+            User.create({username: 'plamen.hristov', firstName:'Plamen', lastname:'Hristov', salt: salt, hashPass: hashedPsw});
 
             salt = generateSalt();
-            hashedPsw = generateHashPassword(salt, 'Plamen');
-            User.create({username: 'ivailo.kenov', firstName:'Ivailo', lastName:'Kenov', salt: salt, hashPass: hashedPsw});
+            hashedPsw = generateHashedPassword(salt, 'Plamen');
+            User.create({username: 'ivailo.kenov', firstName:'Ivailo', lastname:'Kenov', salt: salt, hashPass: hashedPsw});
 
             salt = generateSalt();
-            hashedPsw = generateHashPassword(salt, 'Plamen');
-            User.create({username: 'nikolai.it', firstName:'Nikolai', lastName:'Hristov', salt: salt, hashPass: hashedPsw});
+            hashedPsw = generateHashedPassword(salt, 'Plamen');
+            User.create({username: 'nikolai.it', firstName:'Nikolai', lastname:'Hristov', salt: salt, hashPass: hashedPsw});
             console.log('Users added to Database... ')
-        }
+       }
     });
 
     //create new Instanse of the LocalStrategy, use is for middlewares
-    passport.use(new LocalPassport(function(username, password, done){
-        User.findOne({username: username}).exec(function(err, user){
-            if(err){
-                console.log('Error loading user: ' + err);
-                return;
-            }
 
-            if(user){
-                return done(null, user)
-            }
-            else {
-                return done(null, false)
-            }
-        })
-    }));
-
-    passport.serializeUser(function(user, done){
-        if(user) {
-            done(null, user._id);
-        }
-    });
-
-    passport.deserializeUser(function(id, done){
-
-        //find user by id
-        User.findOne({_id:id}).exec(function(err, user){
-            if(user){
-                return done(null, user)
-            }
-            else{
-                return done(null, false)
-            }
-        })
-    })
 
     function generateSalt() {
         return crypto.randomBytes(128).toString('base64');
     }
 
-    function generateHashPassword(salt, pwd){
+    function generateHashedPassword(salt, pwd) {
         var hmac = crypto.createHmac('sha1', salt);
-        hmac.update(pwd).digest('hex')
+        return hmac.update(pwd).digest('hex');
     }
 
 };

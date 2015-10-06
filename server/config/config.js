@@ -5,12 +5,11 @@ module.exports =  {
     development:{
         rootPath: rootPath,
         db:'mongodb://localhost/macodingclub',
-        port: process.env.PORT || 3050
+        port: process.env.PORT || 3040
     },
     production:{
         rootPath: rootPath,
-        db:'mongodb://paxito1982:aaaaaaaaA@ds033797.mongolab.com:33797/macodingclub',
-        port: process.env.PORT || 3050
+        db:'mongodb://plamen1982:aaaaaaaa@ds033797.mongolab.com:33797/macodingclub',
+        port: process.env.PORT || 3040
     }
 };
-

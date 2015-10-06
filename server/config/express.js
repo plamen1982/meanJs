@@ -6,10 +6,10 @@ var session = require('express-session');
 var passport = require('passport');
 var favicon = require('serve-favicon');
 
-
 module.exports = function(app, config){
 
     app.set('view engine', 'jade');
+
 
     app.set('views', config.rootPath  + '/server/views');
     app.use(favicon(config.rootPath + '/public/img/favicon.ico'));

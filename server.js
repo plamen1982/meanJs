@@ -14,7 +14,9 @@ var config = require('./server/config/config')[env];
 // module.exports = function(app, config) {and here we can use app and config object}
 require('./server/config/express')(app, config);
 require('./server/config/mongoose')(config);
+require('./server/config/passport')();
 require('./server/config/routes')(app, passport);
 
+
 app.listen(config.port);
-console.log('Server running on port: %s , and the NODE_ENV = %s', config.port, process.env.NODE_ENV);
+console.log('Server running on port: %s ', config.port);
