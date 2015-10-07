@@ -1,10 +1,12 @@
-app.factory('auth', function($http, $q, identity){
+app.factory('auth', function($http, $q, identity, UsersResource){
     return {
         login: function(user){
             var deferred = $q.defer();
             $http.post('/login', user).success(function(response){
                 if(response.success){
-                    identity.currentUser = response.user;
+                    var user = new UsersResource();
+                    angular.extend(user, response.user);
+                    identity.currentUser = user;
                     deferred.resolve(true);
                 } else {
                     deferred.resolve(false);
@@ -21,6 +23,14 @@ app.factory('auth', function($http, $q, identity){
 
             });
             return deferred.promise;
+        },
+        isAuthorizedForRole: function(role) {
+            if (identity.isAuthorizedForRole(role)) {
+                return true;
+            }
+            else {
+                return $q.reject('not authorized');
+            }
         }
     }
 });

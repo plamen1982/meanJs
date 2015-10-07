@@ -24,7 +24,8 @@ module.exports = function(config) {
         firstName: String,
         lastName: String,
         salt: String,
-        hashPass: String
+        hashPass: String,
+        roles:[String]
     });
     //
             userSchema.method({
@@ -49,25 +50,26 @@ module.exports = function(config) {
             console.log('Cannot find users: ' + err);
             return;
         }
+/*User.remove({},function(){});*/
+    if(collection.length === 0){
+        var salt;
+        var hashedPsw;
 
-        if(collection.length === 0){
-            var salt;
-            var hashedPsw;
+        salt = generateSalt();
+        hashedPsw = generateHashedPassword(salt, 'Plamen');
+        User.create({username: 'plamen.hristov', firstName:'Plamen', lastname:'Hristov', salt: salt, hashPass: hashedPsw, roles:['admin']});
 
-            salt = generateSalt();
-            hashedPsw = generateHashedPassword(salt, 'Plamen');
-            User.create({username: 'plamen.hristov', firstName:'Plamen', lastname:'Hristov', salt: salt, hashPass: hashedPsw});
+        salt = generateSalt();
+        hashedPsw = generateHashedPassword(salt, 'Plamen');
+        User.create({username: 'ivailo.kenov', firstName:'Ivailo', lastname:'Kenov', salt: salt, hashPass: hashedPsw, roles:['standard']});
 
-            salt = generateSalt();
-            hashedPsw = generateHashedPassword(salt, 'Plamen');
-            User.create({username: 'ivailo.kenov', firstName:'Ivailo', lastname:'Kenov', salt: salt, hashPass: hashedPsw});
+        salt = generateSalt();
+        hashedPsw = generateHashedPassword(salt, 'Plamen');
+        User.create({username: 'nikolai.it', firstName:'Nikolai', lastname:'Hristov', salt: salt, hashPass: hashedPsw});
+        console.log('Users added to Database... ')
+    }
+});
 
-            salt = generateSalt();
-            hashedPsw = generateHashedPassword(salt, 'Plamen');
-            User.create({username: 'nikolai.it', firstName:'Nikolai', lastname:'Hristov', salt: salt, hashPass: hashedPsw});
-            console.log('Users added to Database... ')
-       }
-    });
 
     //create new Instanse of the LocalStrategy, use is for middlewares
 
