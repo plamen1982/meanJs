@@ -25,8 +25,13 @@ app.config(
                controller:'MainCtrl'
            })
            .when('/signup', {
-               templateUrl: 'partials/account/signup',
+               templateUrl: '/partials/account/signup',
                controller: 'SignUpCtrl'
+           })
+           .when('/profile', {
+               templateUrl: '/partials/account/profile',
+               controller: 'ProfileCtrl',
+               resolve: routeUserChecks.authenticated
            })
            .when('/admin/users', {
                templateUrl: '/partials/admin/users-list',
