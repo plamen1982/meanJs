@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var user = require('../models/User');
+var course = require('../models/Course');
 
 
 module.exports = function(config) {
@@ -19,5 +20,6 @@ module.exports = function(config) {
         return;
     });
     user.seedInitialData();
+    course.seedInitialCourses();
 };
 

@@ -20,9 +20,9 @@ app.config(
                templateUrl:'/partials/main/home',
                controller:'MainCtrl'
            })
-           .when('/courses',{
-               templateUrl:'/partials/main/courses',
-               controller:'MainCtrl'
+           .when('/courses', {
+               templateUrl: '/partials/courses/courses-list',
+               controller: 'CoursesListCtrl'
            })
            .when('/signup', {
                templateUrl: '/partials/account/signup',

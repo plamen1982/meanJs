@@ -1,0 +1,12 @@
+.container
+    .jumbotron
+        h1 MACodingClub
+    .row
+        .col-md-6
+            .panel.panel-info
+                .panel-heading.text-center Featured
+                .panel-body(ng-include="'/partials/main/old-courses'")
+        .col-md-6
+            .panel.panel-info
+                .panel-heading.text-center New
+                .panel-body(ng-include="'/partials/main/new-courses'")
