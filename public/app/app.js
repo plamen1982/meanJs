@@ -24,6 +24,10 @@ app.config(
                templateUrl: '/partials/courses/courses-list',
                controller: 'CoursesListCtrl'
            })
+           .when('/courses/:id', {
+               templateUrl: '/partials/courses/course-details',
+               controller: 'CourseDetailsCtrl'
+           })
            .when('/signup', {
                templateUrl: '/partials/account/signup',
                controller: 'SignUpCtrl'
