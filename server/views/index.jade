@@ -1,6 +1,6 @@
 extends includes/layout
 block main-content
-    .navbar.navbar-inverse.navbar-fixed-top
+    .navbar.navbar-default.navbar-fixed-top
         .container
             .navbar-header
                 button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-menu")
@@ -8,15 +8,16 @@ block main-content
                     span(class="icon-bar")
                     span(class="icon-bar")
                     span(class="icon-bar")
-                a(class="navbar-brand" href="#/") MA Coding Club
+                a(class="navbar-brand" href="#/") MACoding Club
             .collapse.navbar-collapse(id="main-menu")
-                ul.nav.navbar-nav
-                    li.active
+                ul.nav.navbar-nav.pull-left
+                    li(class=(title==="Home" ? "active" : ""))
                         a(href="#/") Home
-                    li
+                    li(class=(title==="Courses" ? "active" : ""))
                         a(href="#/courses") Courses
 
                 div(ng-include="'partials/account/login.jade'")
+
     section
         div(ng-view)
     footer

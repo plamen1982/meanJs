@@ -1,17 +1,16 @@
-.navbar-right
+.navbar-right.pull-right
     form.navbar-form(ng-controller="LoginCtrl")
         .form-group(ng-hide="identity.isAuthenticated()")
             input.form-control(type="text", placeholder="Username", ng-model="user.username")
             input.form-control(type="password", placeholder="Password", ng-model="user.password")
             button.btn.btn-default(type="submit", ng-click="login(user)") Login
             a.btn.btn-primary(href="#/signup") Signup
-        div(ng-show="identity.isAuthenticated()") {{ identity.currentUser.username }}
+        div(ng-show="identity.isAuthenticated()")
         ul.nav.navbar-nav.navbar-right(ng-show="identity.isAuthenticated()")
             li.dropdown
                 a.dropdown-toggle(href="", data-toggle="dropdown")
                     | {{ identity.currentUser.firstName + " " + identity.currentUser.lastName }}
                     b.caret
-                span.caret
                 ul.dropdown-menu
                     li(ng-show="identity.currentUser.isAdmin()")
                         a(href="#/admin/users") Users

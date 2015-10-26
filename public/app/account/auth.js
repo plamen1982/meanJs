@@ -35,6 +35,7 @@ app.factory('auth', function($http, $q, identity, UsersResource){
                     angular.extend(user, response.user);
                     identity.currentUser = user;
                     deferred.resolve(true);
+                    console.log('1')
                 } else {
                     deferred.resolve(false);
                 }

@@ -7,9 +7,7 @@ body {
 .navbar-right .navbar-form a.btn {
   margin-left: 10px;
 }
-.navbar.navbar-inverse .navbar-collapse .nav {
-  width: 45%;
-}
+.navbar.navbar-inverse .navbar-collapse .nav,
 footer {
   clear: both;
   padding: 15px 0 52px;
@@ -24,4 +22,7 @@ footer {
   .navbar-form .form-control {
     width: 27%;
   }
+}
+img[alt='Brand'] {
+  width: 25%;
 }
